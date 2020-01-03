@@ -13,10 +13,18 @@ export default new Vuex.Store({
       state.toDos.push(todo);
       localStorage.setItem('todos', JSON.stringify(state.toDos));
     },
+    deleteTodo(state, todo) {
+      state.toDos = state.toDos.filter((val) => val.id !== todo.id);
+      localStorage.setItem('todos', JSON.stringify(state.toDos));
+
+    }
   },
   actions: {
     addTodo({commit}, {todo}) {
       commit('addTodo', todo)
+    },
+    deleteTodo({commit}, {todo}){
+      commit('deleteTodo', todo)
     }
 
   },

@@ -8,17 +8,26 @@
     <v-btn>
       Complete
     </v-btn>
-    <v-btn color="error">
+    <v-btn color="error" @click="deleteTodoMethod(todo)">
       Delete
     </v-btn>
   </v-card>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: 'TodoItem',
   props: {
     todo: {}
+  },
+  methods : {
+      ...mapActions(["deleteTodo"]),
+      deleteTodoMethod(todo){
+      this.deleteTodo({todo})
+
+      }
   }
 }
 </script>
