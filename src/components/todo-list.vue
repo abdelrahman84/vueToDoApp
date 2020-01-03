@@ -1,19 +1,31 @@
 <template lang="html">
   <div>
-    <TodoItem class="mb-3" />
-    <TodoItem class="mb-3"/>
+    <div v-if="isEmpty">
+      <p>no toDos yet</p>
+    </div>
   </div>
 </template>
 
 <script>
-import TodoItem from '@/components/todo-item';
+import TodoItem from "@/components/todo-item";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
-    TodoItem,
+    TodoItem
+  },
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapGetters({
+      toDos: "getTodos"
+    }),
+    isEmpty() {
+      return this.toDos.length === 0;
+    }
   }
-}
+};
 </script>
 
-<style lang="css">
-</style>
+<style lang="css"></style>
