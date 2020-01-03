@@ -16,6 +16,15 @@ export default new Vuex.Store({
     deleteTodo(state, todo) {
       state.toDos = state.toDos.filter((val) => val.id !== todo.id);
       localStorage.setItem('todos', JSON.stringify(state.toDos));
+    },
+    completeToDo(state, todo) {
+     state.toDos.map((val) => {
+       if (val.id === todo.id) {
+         todo.completed = true
+       }
+       return todo;
+     });
+     localStorage.setItem('todos', JSON.stringify(state.toDos));
 
     }
   },
@@ -25,6 +34,9 @@ export default new Vuex.Store({
     },
     deleteTodo({commit}, {todo}){
       commit('deleteTodo', todo)
+    },
+    completeToDo({commit}, {todo}){
+      commit('completeToDo', todo)
     }
 
   },
@@ -32,7 +44,7 @@ export default new Vuex.Store({
     getTodos(state) {
     const toDos = JSON.parse(localStorage.getItem('todos'));
       if (toDos && toDos.length > 0) {
-        state.toDos = toDos;
+        state.toDos = toDos.filter(todo => todo.completed == false);
       }
        return state.toDos;
     }

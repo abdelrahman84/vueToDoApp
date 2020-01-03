@@ -2,10 +2,10 @@
   <v-card>
     <v-card-title primary-title>
       <div>
-        <h3 class="headline mb-0">{{todo.title}}</h3>
+        <h3 class="headline mb-0">{{ todo.title }}</h3>
       </div>
     </v-card-title>
-    <v-btn>
+    <v-btn v-if="!todo.completed" @click="completeTodoMethod(todo)">
       Complete
     </v-btn>
     <v-btn color="error" @click="deleteTodoMethod(todo)">
@@ -18,19 +18,20 @@
 import { mapActions } from "vuex";
 
 export default {
-  name: 'TodoItem',
+  name: "TodoItem",
   props: {
     todo: {}
   },
-  methods : {
-      ...mapActions(["deleteTodo"]),
-      deleteTodoMethod(todo){
-      this.deleteTodo({todo})
-
-      }
+  methods: {
+    ...mapActions(["deleteTodo", "completeToDo"]),
+    deleteTodoMethod(todo) {
+      this.deleteTodo({ todo });
+    },
+    completeTodoMethod(todo) {
+      this.completeToDo({ todo });
+    }
   }
-}
+};
 </script>
 
-<style lang="css">
-</style>
+<style lang="css"></style>
