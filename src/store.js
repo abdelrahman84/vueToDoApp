@@ -15,6 +15,9 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    addTodo({commit}, {todo}) {
+      commit('addTodo', todo)
+    }
 
   },
   getters: {

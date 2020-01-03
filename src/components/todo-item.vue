@@ -2,7 +2,7 @@
   <v-card>
     <v-card-title primary-title>
       <div>
-        <h3 class="headline mb-0">Title</h3>
+        <h3 class="headline mb-0">{{todo.title}}</h3>
       </div>
     </v-card-title>
     <v-btn>
@@ -16,6 +16,10 @@
 
 <script>
 export default {
+  name: 'TodoItem',
+  props: {
+    todo: {}
+  }
 }
 </script>
 
