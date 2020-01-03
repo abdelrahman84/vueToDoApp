@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
-    <div v-if="isEmpty">
-      <h2>no toDos yet</h2>
+    <div v-if="isEmpty && completedIsEmpty">
+      <h2>NO ToDos YET</h2>
     </div>
 
     <div v-if="!isEmpty">
@@ -11,9 +11,14 @@
           <TodoItem :todo="todo"></TodoItem>
         </div>
       </v-container>
+    </div>
 
+    <div v-if="!completedIsEmpty">
       <v-container>
         <h2>Completed:</h2>
+        <div v-for="todo in completedToDos" :key="todo.id" :cols="todo.flex">
+          <TodoItem :todo="todo"></TodoItem>
+        </div>
       </v-container>
     </div>
   </div>
@@ -32,10 +37,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      toDos: "getTodos"
+      toDos: "getTodos",
+      completedToDos: "getCompletedTodos"
     }),
     isEmpty() {
       return this.toDos.length === 0;
+    },
+    completedIsEmpty() {
+      return this.completedToDos.length === 0;
     }
   }
 };
